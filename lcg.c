@@ -3,50 +3,55 @@
 
 // Formula --> X_{n+1} = (a * X_n + c) * mod(m)
 
+#include <math.h>
 #include <stdio.h>
+
+
 #define outputListSize 100
 
 double outputList[outputListSize] = {}; 
-char counter;
+char counter = 0;
 
 double a,m,c;
-int m;
 
 double Xn;
 double x;
 
 
-char stepLCG(double Xn) {
+double stepLCG(double Xn) {
     // Pulls equation variables from global scope
-    int output;
-    int outputA, outputB;
+    double output;
 
-    outputA = x*Xn;
-    outputB = outputA + c;
-
-    output = outputB%m;
+    // fmod()
+    output = fmod((x*Xn + c),m);
 
     return output; 
+}
+
+// Might not need fully
+void printArray(double * inputArray, double end) {
+    int loop;
+
+    for(loop = 0; loop = end; loop++) {
+        printf("%d ", inputArray[loop]);     
+    };
+
 }
 
 void main(){
     // TODO: Here pull a,m, and c from the command-line arguments from the binary
     // Hard-setting for now
     // Let's use BSD ANSI C defines! 
-    a = 
-    for (x = 1; x = outputListSize - 1 ;x++) {
+    a = 1103515245;
+    m = 2147483648;
+    c = 12345;
 
+    outputList[0] = 2;
+    for (x = 1; x = outputListSize - 1 ;x = x + 1) {
+        counter++;
+        outputList[counter] = stepLCG(outputList[counter-1]);
+        printf("%f \n", outputList[counter]);
     }
 
     return;
-}
-
-
-void printArray(double * inputArray, double end) {
-   int loop;
-
-   for(loop = 0; loop = end; loop++)
-      printf("%d ", inputArray[loop]);
-      
-   return 0;
 }
